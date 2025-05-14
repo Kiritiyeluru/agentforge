@@ -1,81 +1,122 @@
-## Project Summary
+# AgentForge: LLM Agents for Algorithmic Trading Strategy Extraction
 
-Absolutely—here’s a concise and structured summary of the **context, purpose, constraints, decision rationale, and alternatives** related to your LLM agent framework selection:
+## 🚀 Project Vision
 
----
+AgentForge is a framework focused on building intelligent LLM-based agents to:
 
-## **1. Context**
+- Search for useful open-source algorithmic trading repositories on GitHub
+- Analyze these repositories to identify valuable code snippets such as trading strategies and indicators
+- Extract and organize these code snippets for reuse in building a custom algorithmic trading system
 
-- **Developer Profile**: Solo coder, technically capable, uses VS Code with tools like Cline and LLM API.
-- **Project Goal**: Build a Python-based algo trading system by:
-    - Cloning and analyzing 10–12 GitHub repos.
-    - Extracting relevant code snippets (e.g., strategies, indicators).
-    - Reusing snippets to assemble a custom codebase.
-- **Future Expansion**: Automate scraping of strategies/indicators.
-    - Run backtests.
-    - Perform ML-based breakout prediction.
-    - Automate the agent-based system across stages.
+This repository contains the core agent implementations that perform these tasks. Once developed, these agents will be used in conjunction with cloned repositories in separate projects to automate strategy extraction and system assembly.
 
----
+## 🌟 Core Principles
 
-## **2. Purpose**
+1. **Modularity**: Agents are independent, composable components focused on specific tasks like repo loading, file classification, and snippet extraction.
+2. **Scalability**: Designed to support multi-agent workflows and complex orchestration using LangGraph.
+3. **Extensibility**: Easy to add new agents or extend existing ones for additional capabilities.
+4. **Transparency**: Clear state management and error handling for robust workflows.
 
-- **Short-Term**: Automate code analysis of multiple repos via an intelligent agent.
-- **Long-Term**: Use the same agent framework for more advanced tasks like:
-    - Modular code generation
-    - Workflow orchestration
-    - Data scraping
-    - Backtesting and ML orchestration
+## 🛠 Technology Stack
 
----
+- **Primary Framework**: LangGraph for workflow orchestration
+- **Language**: Python
+- **Key Libraries**: 
+  - Pydantic for typed state management
+  - LangChain for LLM interactions
+  - GitPython for repository cloning
+- **Supported LLM Providers**: Anthropic Claude, OpenAI GPT
 
-## **3. Key Constraints & Preferences**
+## 🗺 Current Focus Areas
 
-- **Solo Developer**: Needs to avoid frameworks with steep learning curves or heavy infra requirements.
-- **Consistency**: Prefers to invest in learning one scalable system now, rather than switching tools later.
-- **Modular/Composable**: Needs the ability to automate and extend workflows in the future (multi-agent collaboration, graph-based workflows).
-- **Not Interested In**: No-code/low-code tools that offer speed but limit control or reusability.
+1. **Core Agent Development**
+   - RepoLoaderAgent: Discover and clone GitHub repositories
+   - FileClassifierAgent: Identify relevant Python files for trading strategies
+   - SnippetExtractorAgent: Extract code snippets using LLM prompts
 
----
+2. **Workflow Orchestration**
+   - Define and manage multi-agent workflows with state transitions
+   - Implement error handling and retry mechanisms
 
-## **4. Final Choice:**
+3. **Future Expansion**
+   - ML-based snippet evaluation
+   - Plugin architecture for agent extensions
+   - Feedback-driven learning and UI components
 
-### **Primary Framework**
+## 🔬 Architectural Highlights
 
-- **LangGraph**:
-    - **Why**: Graph-based, composable, reusable workflows; excellent for repo analysis and complex task chaining.
-    - **Scales to**: ML automation, multi-agent systems, state management.
+- **Typed State Management**: Using Pydantic models for workflow state
+- **Conditional Workflow Routing**: Dynamic transitions based on agent outputs
+- **Robust Error Recovery**: Intelligent retry and fallback strategies
+- **Modular Agent Design**: Clear separation of concerns for maintainability
 
-### **Supporting Tools**
+## 🚧 Roadmap
 
-- **Flowise** (visual debugging and prototyping with LangChain/LangGraph)
-- **CrewAI** (for future multi-agent orchestration, modular by role)
-- **TaskWeaver** (when you want LLM agents to generate structured code or automate deeper workflows)
+### Phase 1: Foundation
+- Set up environment and dependencies
+- Develop core agents and basic workflow integration
 
----
+### Phase 2: Advanced Capabilities
+- Implement ML snippet evaluation
+- Enable multi-agent collaboration and feedback loops
 
-## **5. Alternatives Considered and Passed Over**
+### Phase 3: Ecosystem Expansion
+- Build plugin system and cross-domain agent templates
+- Enhance observability and monitoring
 
-| Framework | Reason for Rejection |
-| --- | --- |
-| **AutoAgent** | Zero-code, not suitable for developer customization or modularity |
-| **SmythOS** | High abstraction, good UI but limits future control and scaling |
-| **AutoGen Studio** | More useful for multi-agent conversations than code analysis tasks |
-| **n8n** | Great for visual workflows, but lacks depth for repo/code tasks |
-| **AgentGPT / Cognosys** | UI-focused, less developer-oriented for advanced workflows |
-| **MetaGPT / OpenAgents** | Useful for full team automation, but overkill for solo now |
+## 🤝 Contributing
 
----
+Contributions are welcome! Areas include:
+- Agent implementations and improvements
+- Workflow enhancements
+- Documentation and research
+- Experimental features
 
-## **6. Summary Judgment**
+## 📦 Getting Started
 
-**Chosen Stack** provides:
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/agentforge.git
 
-- **Power**: Capable of scaling to complex multi-agent tasks.
-- **Control**: Full Python-based custom logic and integration.
-- **Modularity**: Easily reusable workflows and components.
-- **Growth Path**: Supports your immediate needs and future ambitions with a single consistent ecosystem.
+# Set up virtual environment
+python -m venv venv
+# On Windows use:
+# venv\Scripts\activate
+# On Unix or MacOS use:
+# source venv/bin/activate
 
----
+# Install dependencies
+pip install -r requirements.txt
 
-Would you like a template repo or project structure to kick off your first LangGraph-based agent for GitHub repo analysis?
+# Run initial setup script if available
+python scripts/setup_environment.py
+```
+
+## 🗂 Important Files and Folders
+
+- `agentforge/` - Core agent implementations and workflows
+- `automation/github-projects/` - GitHub Projects automation setup, including:
+  - `README.md` - Explanation and maintenance guide
+  - `plan.md` - Detailed implementation plan
+  - `hooks/` - Commit message validation hooks
+  - `workflows/` - GitHub Actions workflows for automation
+- `automation/session_next_steps.md` - File to update at the end of each coding session to track next tasks
+- `cline_docs/` - Project documentation including roadmap, current tasks, tech stack, and codebase summary
+- `README.md` - Main project overview and instructions (this file)
+
+## 📝 Instructions for Every Coding Session
+
+1. Review `automation/session_next_steps.md` to understand the next tasks.
+2. Update `automation/session_next_steps.md` at the end of the session with fresh next steps.
+3. Follow commit message conventions as enforced by commit hooks and GitHub Actions.
+4. Use GitHub Projects board to track task progress and update issues/PRs accordingly.
+5. Keep documentation in `cline_docs/` up to date with any significant changes.
+6. Use the automation workflows in `automation/github-projects/workflows/` to maintain project status.
+
+## 📄 License
+
+[Specify your license here]
+
+## 🌐 Contact
+
+[Add contact information or contribution guidelines]
